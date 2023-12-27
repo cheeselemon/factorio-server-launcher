@@ -21,6 +21,9 @@ RUN wget https://www.factorio.com/get-download/$FACTORIO_VERSION/headless/linux6
   && rm /tmp/factorio.tar.xz \
   && chown -R factorio:factorio $FACTORIO_VOL
 
+# List contents of the directory to find the executable path
+RUN ls -l $FACTORIO_VOL
+
 # Switch to the factorio user
 USER factorio
 
