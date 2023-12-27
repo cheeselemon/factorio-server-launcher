@@ -14,14 +14,18 @@ ENV FACTORIO_HOME=/home/ubuntu/factorio
 ENV SAVEFILE_NAME=my-save.zip
 
 # Download and extract Factorio server
-
 RUN wget https://www.factorio.com/get-download/$FACTORIO_VERSION/headless/linux64 -O /tmp/factorio.tar.xz \
-  && mkdir $FACTORIO_VOL \
-  && tar -xJf /tmp/factorio.tar.xz -C $FACTORIO_VOL \
+  && mkdir $FACTORIO_VOL
+
+# Debug: List the contents of the tarball
+RUN tar -tvf /tmp/factorio.tar.xz
+
+# Extract the tarball
+RUN tar -xJf /tmp/factorio.tar.xz -C $FACTORIO_VOL \
   && rm /tmp/factorio.tar.xz \
   && chown -R factorio:factorio $FACTORIO_VOL
 
-# List contents of the directory to find the executable path
+# Debug: List the contents of the /factorio directory after extraction
 RUN ls -l $FACTORIO_VOL
 
 # Switch to the factorio user
@@ -38,4 +42,6 @@ EXPOSE 27015/tcp
 WORKDIR $FACTORIO_VOL
 
 # Command to start the Factorio server
-CMD ["./bin/x64/factorio", "--start-server", "${SAVEFILE_NAME}", "--server-settings", "./data/server-settings.json", "--rcon-port", "27015", "--rcon-password", "your_rcon_password"]
+CMD ["./factorio/bin/x64/factorio", "--start-server", "${SAVEFILE_NAME}", "--server-settings", "./data/server-settings.json", "--rcon-port", "27015", "--rcon-password", "your_rcon_password"]
+# dummy command
+# CMD ["tail", "-f", "/dev/null"]
