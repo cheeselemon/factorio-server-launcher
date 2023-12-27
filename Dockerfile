@@ -2,7 +2,7 @@
 FROM ubuntu:latest
 
 # Install dependencies
-RUN apt-get update && apt-get install -y wget xz-utils
+RUN apt-get update && apt-get install -y wget xz-utils libc6-compat
 
 # Create a user for running the server
 RUN useradd -ms /bin/bash factorio
