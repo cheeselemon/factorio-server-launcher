@@ -8,12 +8,13 @@ RUN apt-get update && apt-get install -y wget xz-utils
 RUN useradd -ms /bin/bash factorio
 
 # Set environment variables
-ENV FACTORIO_VERSION=1.1.100
+ENV FACTORIO_VERSION=stable
 ENV FACTORIO_VOL=/factorio
 ENV FACTORIO_HOME=/home/ubuntu/factorio
 ENV SAVEFILE_NAME=my-save.zip
 
 # Download and extract Factorio server
+
 RUN wget https://www.factorio.com/get-download/$FACTORIO_VERSION/headless/linux64 -O /tmp/factorio.tar.xz \
   && mkdir $FACTORIO_VOL \
   && tar -xJf /tmp/factorio.tar.xz -C $FACTORIO_VOL \
