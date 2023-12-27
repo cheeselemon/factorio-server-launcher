@@ -40,9 +40,9 @@ RUN mkdir $FACTORIO_HOST/mods
 RUN mkdir $FACTORIO_HOST/saves
 
 # link FACTORIO_HOST/mods to FACTORIO_VOL/factorio/mods
-RUN ln -s $FACTORIO_VOL/factorio/mods $FACTORIO_HOST/mods
+RUN ln -s $FACTORIO_HOST/mods $FACTORIO_VOL/factorio/mods
 # link FACTORIO_HOST/saves to FACTORIO_VOL/factorio/saves
-RUN ln -s $FACTORIO_VOL/factorio/saves $FACTORIO_HOST/saves
+RUN ln -s $FACTORIO_HOST/saves $FACTORIO_VOL/factorio/saves
 
 # Copy the default server configuration
 # COPY server-config.json $FACTORIO_VOL/data/server-settings.json
@@ -55,6 +55,6 @@ EXPOSE 27015/tcp
 WORKDIR $FACTORIO_VOL
 
 # Command to start the Factorio server
-CMD ["./factorio/bin/x64/factorio", "--start-server", "./parent/my-save.zip", "--server-settings", "./parent/server-settings.json", "--rcon-port", "27015", "--rcon-password", "your_rcon_password"]
+CMD ["./factorio/bin/x64/factorio", "--start-server", "./parent/saves/my-save.zip", "--server-settings", "./parent/server-settings.json", "--rcon-port", "27015", "--rcon-password", "entp_entp_entp"]
 # dummy command
 # CMD ["tail", "-f", "/dev/null"]
