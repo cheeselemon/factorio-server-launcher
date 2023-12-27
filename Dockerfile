@@ -1,8 +1,9 @@
 # Use a base image with the necessary dependencies
-FROM ubuntu:latest
+FROM frolvlad/alpine-glibc:alpine-3.12
 
 # Install dependencies
-RUN apt-get update && apt-get install -y wget xz-utils glibc-source
+RUN apk update 
+RUN apk add --update --no-cache --no-progress bash binutils curl file gettext jq libintl pwgen shadow su-exec
 
 # Create a user for running the server
 RUN useradd -ms /bin/bash factorio
@@ -32,7 +33,7 @@ RUN ls -l $FACTORIO_VOL
 USER factorio
 
 # Copy the default server configuration
-COPY server-config.json $FACTORIO_VOL/data/server-settings.json
+# COPY server-config.json $FACTORIO_VOL/data/server-settings.json
 
 # Expose necessary ports
 EXPOSE 34197/udp
@@ -42,6 +43,6 @@ EXPOSE 27015/tcp
 WORKDIR $FACTORIO_VOL
 
 # Command to start the Factorio server
-CMD ["./factorio/bin/x64/factorio", "--start-server", "${SAVEFILE_NAME}", "--server-settings", "./data/server-settings.json", "--rcon-port", "27015", "--rcon-password", "your_rcon_password"]
+CMD ["./factorio/bin/x64/factorio", "--start-server", "./parent/my-save.zip", "--server-settings", "./parent/server-settings.json", "--rcon-port", "27015", "--rcon-password", "your_rcon_password"]
 # dummy command
 # CMD ["tail", "-f", "/dev/null"]
