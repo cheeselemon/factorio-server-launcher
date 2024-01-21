@@ -45,7 +45,10 @@ RUN ln -s $FACTORIO_HOST/mods $FACTORIO_VOL/factorio/mods
 RUN ln -s $FACTORIO_HOST/saves $FACTORIO_VOL/factorio/saves
 
 # Copy the default server configuration
-# COPY server-config.json $FACTORIO_VOL/data/server-settings.json
+# COPY server-adminlist.json $FACTORIO_VOL/factorio/data/server-adminlist.json
+# create symlink
+RUN ln -s $FACTORIO_HOST/server-adminlist.json $FACTORIO_VOL/factorio/server-adminlist.json
+
 
 # Expose necessary ports
 EXPOSE 34197/udp

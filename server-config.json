@@ -24,7 +24,6 @@
   "auto_pause": true,
   "only_admins_can_pause_the_game": true,
   "autosave_only_on_server": true,
-  "admin_players": [],
   "rcon_password": "entp_entp",
   "rcon_port": 27015,
   "server_settings": {
